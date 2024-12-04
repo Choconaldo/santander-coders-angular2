@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Faça cadastro</h2>
+  <form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="card-fields"
+        >Name: <input type="text" name="name" formControlName="name"
+      /></label>
+    </div>
+    <label class="card-fields"
+      >Username: <input type="text" name="username" formControlName="username"
+    /></label>
+
+    <div class="form-group">
+      <label class="card-fields"
+        >Password:
+        <input type="password" name="password" formControlName="password"
+      /></label>
+    </div>
+    <button class="button-15" type="submit" [disabled]="!form.valid">
+      Cadastrar
+    </button>
+  </form>
+  <div class="card-links">
+    <a [routerLink]="['']">Login</a>
+  </div>
+  <div>
+    <button class="button-15" type="button" (click)="[getTest()]">
+      Teste API
+    </button>
+  </div>
+</div>

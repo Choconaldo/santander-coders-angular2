@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Faça seu login</h2>
+  <form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="card-fields"
+        >Username:
+        <input type="text" name="username" formControlName="username"
+      /></label>
+    </div>
+    <div class="form-group">
+      <label class="card-fields"
+        >Password:
+        <input type="password" name="password" formControlName="password"
+      /></label>
+    </div>
+    <button class="button-15" type="submit" [disabled]="!form.valid">
+      Entrar
+    </button>
+  </form>
+  <div class="card-links">
+    <p>Não tem cadastro? <a [routerLink]="['/sign-up']">Cadastre-se</a></p>
+  </div>
+</div>

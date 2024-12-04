@@ -1,0 +1,7 @@
+.Outer-container {
+  background-color: whitesmoke;
+  max-width: 800px;
+  margin-inline: auto;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
