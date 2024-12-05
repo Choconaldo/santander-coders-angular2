@@ -1,1 +1,23 @@
-<p>users-list works!</p>
+<div class="container">
+  <h2>Seja bem-vindo, {{ user.name }}</h2>
+  <div class="card">
+    <h3>Seus dados:</h3>
+    <p><span>Username: </span>{{ user.username }}</p>
+    <p><span>Id: </span>{{ user.id }}</p>
+    <p><span>Pontuação: </span>{{ user.score }}</p>
+  </div>
+  <button class="button-15" (click)="logoutFunc()">Logout</button>
+  <h2>Todos usuários:</h2>
+
+  @for (item of userList; track $index) {
+  <div class="card">
+    <div class="card-content">
+      <div>
+        <p><span>UserName: </span>{{ item.username }}</p>
+        <p><span>Id: </span>{{ item.id }}</p>
+        <p><span>Pontuação: </span>{{ item.score }}</p>
+      </div>
+    </div>
+  </div>
+  }
+</div>
