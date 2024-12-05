@@ -22,6 +22,7 @@ export class AuthService {
       username: username,
       password: password,
     };
+
     return this.http.post(`${this.apiUrl}/auth/sign-in`, data).pipe(
       tap((response: any) => {
         this.authToken = response.accessToken;
@@ -31,28 +32,12 @@ export class AuthService {
     );
   }
 
-  /* isLoggedIn(): boolean {
-    if (this.authToken == this.localStorageService.get('authToken')) {
-      return true;
-    } else {
-      return false;
-    }
-  } */
-
   isLoggedIn(token: string): Observable<any> {
     const data = {
       token: token,
     };
     return this.http.post<any>(`${this.apiUrl}/auth/validate`, data);
   }
-  /* isLoggedIn(token: string) {
-    const data = {
-      token: token,
-    };
-    return this.http
-      .post(`${this.apiUrl}/auth/validate`, data)
-      .pipe(tap((response: any) => {}));
-  } */
 
   logout() {
     this.localStorageService.remove('authToken');

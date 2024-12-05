@@ -5,8 +5,9 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,11 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   form!: FormGroup;
 
@@ -44,17 +49,13 @@ export class SignupComponent {
     return this.form.get('password');
   }
 
-  onSubmit() {
-    this.apiService.postSignUp(this.form.value).subscribe();
+  showSuccess() {
+    this.toastr.success('Cadastro realizado com sucesso!');
   }
 
-  data!: any;
-  getTest() {
-    this.apiService.getUsers().subscribe({
-      next: (data) => {
-        this.data = data;
-        console.log('Dados obtidos:', this.data);
-      },
-    });
+  onSubmit() {
+    this.apiService.postSignUp(this.form.value).subscribe();
+    this.router.navigate(['']);
+    this.showSuccess();
   }
 }

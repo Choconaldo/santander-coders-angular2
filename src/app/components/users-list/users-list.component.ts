@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-list',
@@ -11,10 +12,16 @@ import { ApiService } from '../../services/api.service';
 export class UsersListComponent {
   constructor(
     private authService: AuthService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private toastr: ToastrService
   ) {}
+  showSuccess() {
+    this.toastr.success('Deslogado com sucesso!');
+  }
+
   logoutFunc() {
     this.authService.logout();
+    this.showSuccess();
   }
   user: any = '';
   userList: any = '';

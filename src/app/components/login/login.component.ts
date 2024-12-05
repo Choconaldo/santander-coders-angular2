@@ -7,6 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   form!: FormGroup;
 
@@ -37,11 +42,20 @@ export class LoginComponent {
     return this.form.get('password');
   }
 
+  showSuccess() {
+    this.toastr.success('Logado com sucesso!');
+  }
+
   onSubmit() {
     this.authService
       .login(this.form.value.username, this.form.value.password)
       .subscribe({
         next: () => {
+          this.form.setValue({
+            username: '',
+            password: '',
+          });
+          this.showSuccess();
           this.router.navigate(['/users-list']);
         },
       });
